@@ -16,66 +16,67 @@ int Fact (int n)
 		r *= i;
 	return r;
 }
-
-// indexes initialization
-int x, i, j;
-// random variables
-double u,r,t;
-// array initialization
-int *o;
-o = (int *)malloc(sizeof(int)*k);
-if (o == 0)
-{
-	perror("malloc");
-	return 1;
-}
-
-for (x=1; x<=k; x++)
-  o[x] = 0;
-for (i=0; i<n; i++) {
-  x=1;
-  u=Random();for (x=0; x<k; x++)
-	o[x] = 0;
-for (i =0; i<n; i++) {
-	r = Random();
-	for (j=1; j<d; j++) {
-		u = Random();
-		if (u>r)
-			r=u;
+void test(){
+	// indexes initialization
+	int x, i, j;
+	// random variables
+	double u,r,t;
+	// array initialization
+	int *o;
+	o = (int *)malloc(sizeof(int)*k);
+	if (o == 0)
+	{
+		perror("malloc");
+		return 1;
 	}
-	u = exp(d*log(r));
-	x = (int) u*k;
-	o[x]++;
+
+	for (x=1; x<=k; x++)
+	  o[x] = 0;
+	for (i=0; i<n; i++) {
+	  x=1;
+	  u=Random();for (x=0; x<k; x++)
+		o[x] = 0;
+	for (i =0; i<n; i++) {
+		r = Random();
+		for (j=1; j<d; j++) {
+			u = Random();
+			if (u>r)
+				r=u;
+		}
+		u = exp(d*log(r));
+		x = (int) u*k;
+		o[x]++;
+	}
+	  t=Random();
+	  while (t>u) {
+	    x++;
+	    u=t;
+	    t=Random();
+	  }
+	  if (x>k)
+	    x=k;
+	  o[x]++;
+	}
+
+	//calc v (with e_x as expectation)
+
+	double v=0.00;
+	int w=0;
+	double o_div = 0.00;
+	for (w=1; w<=k; w++){
+		double e_x = n*w/Fact(1+w);
+		o_div = o[w]-e_x;
+		o_div = o_div*o_div;
+		o_div = o_div/e_x;
+	}
+	//critical values
+
+	double v1_s = idfChisquare(k-1,a/2);
+	double v2_s = idfChisquare(k-1,1-a/2);
+
+	//proof
+	/*
+	if (v < v1_s || v > v2_s)
+		printf("test failed");
+	*/
 }
-  t=Random();
-  while (t>u) {
-    x++;
-    u=t;
-    t=Random();
-  }
-  if (x>k)
-    x=k;
-  o[x]++;
-}
-
-//calc v (with e_x as expectation)
-
-double v=0.00;
-int w=0;
-double o_div = 0.00;
-for (w=1; w<=k; w++){
-	double e_x = n*w/Fact(1+w);
-	o_div = o[w]-e_x;
-	o_div = o_div*o_div;
-	o_div = o_div/e_x;
-}
-//critical values
-
-double v1_s = idfChisquare(k-1,a/2);
-double v2_s = idfChisquare(k-1,1-a/2);
-
-//proof
-/*
-if (v < v1_s || v > v2_s)
-	printf("test failed");
-*/
