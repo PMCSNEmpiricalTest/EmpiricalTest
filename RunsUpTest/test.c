@@ -32,12 +32,12 @@ int test(){
 	o = (int *)calloc(k,sizeof(int));
 	if (o == 0)
 	{
-		perror("error in malloc");
+		perror("error in calloc");
 		return EXIT_FAILURE;
 	}
 
 	for (i=0; i<n; i++) {
-	  x=1;
+	  x=0;
 	  u=Random();
 		t=Random();
 	  while (t>u) {
@@ -45,8 +45,8 @@ int test(){
 	    u=t;
 	    t=Random();
 	  }
-	  if (x>k)
-	    x=k;
+	  if (x>=k)
+	    x=k-1;
 	  o[x]++;
 	}
 
@@ -58,15 +58,15 @@ int test(){
 	double e_x = 0.00;
 	for (w=0; w<k; w++){
 		e_x = n*w/Fact(2+w);
-		//printf("This is e_x : %f\n",e_x);
+		printf("This is e_x : %f\n",e_x);
 		o_div = o[w]-e_x;
-		//printf("This is o[w]-e_x : %f\n",o_div);
+		printf("This is o[w]-e_x : %f\n",o_div);
 		o_div = o_div*o_div;
-		//printf("This is o_div*o_div : %f\n",o_div);
+		printf("This is o_div*o_div : %f\n",o_div);
 		o_div = o_div/e_x;
-		//printf("This is o_div/e_x : %f\n",o_div);
+		printf("This is o_div/e_x : %f\n",o_div);
 		v = v+o_div;
-		//printf("This is v+o_div : %f\n",o_div);
+		printf("This is v+o_div : %f\n",v);
 	}
 	//critical values
 
