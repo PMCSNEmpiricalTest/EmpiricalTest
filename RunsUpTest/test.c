@@ -32,7 +32,7 @@ int test(){
 	o = (int *)calloc(k,sizeof(int));
 	if (o == 0)
 	{
-		perror("error in malloc");
+		perror("error in calloc");
 		return EXIT_FAILURE;
 	}
 
@@ -65,15 +65,15 @@ int test(){
 	double e_x = 0.00;
 	for (w=0; w<k; w++){
 		e_x = n*w/Fact(2+w);
-		//printf("This is e_x : %f\n",e_x);
+		printf("This is e_x : %f\n",e_x);
 		o_div = o[w]-e_x;
-		//printf("This is o[w]-e_x : %f\n",o_div);
+		printf("This is o[w]-e_x : %f\n",o_div);
 		o_div = o_div*o_div;
-		//printf("This is o_div*o_div : %f\n",o_div);
+		printf("This is o_div*o_div : %f\n",o_div);
 		o_div = o_div/e_x;
-		//printf("This is o_div/e_x : %f\n",o_div);
+		printf("This is o_div/e_x : %f\n",o_div);
 		v = v+o_div;
-		//printf("This is v+o_div : %f\n",o_div);
+		printf("This is v+o_div : %f\n",v);
 	}
 	//critical values
 
