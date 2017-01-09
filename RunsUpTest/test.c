@@ -5,8 +5,8 @@
 #include "rngs.h"
 #include "rvms.h"
 
-#define n 10
-#define k 4
+#define n 7200
+#define k 6
 //confidence level
 #define a 0.05
 
@@ -20,17 +20,18 @@ int Fact (int u)
 
 int test(){
 	// indexes initialization
-	int x, i, j;
+	int x,i;
 	// random variables
-	double u,r,t;
+	double u,t;
 	// array initialization
 	int *o;
 	o = (int *)malloc(sizeof(int)*k);
 	if (o == 0)
 	{
-		perror("malloc");
+		perror("error in malloc");
 		return EXIT_FAILURE;
 	}
+	printf("malloc success\n");
 
 	for (x=1; x<=k; x++)
 	  o[x] = 0;
@@ -53,17 +54,25 @@ int test(){
 	double v=0.00;
 	int w=0;
 	double o_div = 0.00;
+	double e_x = 0.00;
 	for (w=1; w<=k; w++){
-		double e_x = n*w/Fact(1+w);
+		e_x = n*w/Fact(1+w);
+		//printf("This is e_x : %f\n",e_x);
 		o_div = o[w]-e_x;
+		//printf("This is o[w]-e_x : %f\n",o_div);
 		o_div = o_div*o_div;
+		//printf("This is o_div*o_div : %f\n",o_div);
 		o_div = o_div/e_x;
+		//printf("This is o_div/e_x : %f\n",o_div);
+		v = v+o_div;
+		//printf("This is v+o_div : %f\n",o_div);
 	}
 	//critical values
 
 	double v1_s = idfChisquare(k-1,a/2);
 	double v2_s = idfChisquare(k-1,1-a/2);
 
+	printf("This is v : %f\n", v);
 	return 0;
 
 	//proof
@@ -74,6 +83,9 @@ int test(){
 }
 
 int main(int argc, char **argv){
-	test();
+	int i=0;
+	for (i=0;i<10;i++){
+		test();
+	}
 	return EXIT_SUCCESS;
 }
