@@ -22,14 +22,14 @@ int Fact (int u)
 int test(){
 	// preliminary test on generator
 	assert(TestRandomNotVerbose() == EXIT_SUCCESS);
-	
+
 	// indexes initialization
 	int x,i;
 	// random variables
 	double u,t;
 	// array initialization
 	int *o;
-	o = (int *)malloc(sizeof(int)*k);
+	o = (int *)calloc(k,sizeof(int));
 	if (o == 0)
 	{
 		perror("error in malloc");
@@ -37,8 +37,6 @@ int test(){
 	}
 	printf("malloc success\n");
 
-	for (x=1; x<=k; x++)
-	  o[x] = 0;
 	for (i=0; i<n; i++) {
 	  x=1;
 	  u=Random();
