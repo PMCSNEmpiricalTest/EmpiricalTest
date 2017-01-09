@@ -21,7 +21,7 @@ int Fact (int u)
 	return r;
 }
 
-int test(int stream){
+double test(int stream){
 	// preliminary test on generator
 	assert(TestRandomNotVerbose() == EXIT_SUCCESS);
 
@@ -97,7 +97,7 @@ int test(int stream){
 
 
 	if(DEBUG) printf(" -----  END OF TEST -----\n\n");
-	return 0;
+	return v;
 
 	//proof
 	/*
@@ -117,10 +117,20 @@ int main(int argc, char **argv){
     }
 	}
 
+	double v1_s = idfChisquare(k-1,a/2);
+	double v2_s = idfChisquare(k-1,1-a/2);
+	int disp[3] = {0,0,0};
+
 	int i=0;
+	double temp = 0;
+	printf("Test -> v1_s: %f ; v2_s: %f\n", v1_s, v2_s);
 	printf("(stream, v, initial seed)\n");
 	for (i=0;i<256;i++){
-		test(i);
+		temp = test(i);
+		if(temp<v1_s) disp[0]++;
+		if(temp>v2_s) disp[2]++;
+		if(temp>=v1_s && temp<=v2_s) disp[1]++;
 	}
+	printf("\nDispersion is:\n%d;%d;%d\n", disp[0], disp[1], disp[2]);
 	return EXIT_SUCCESS;
 }
