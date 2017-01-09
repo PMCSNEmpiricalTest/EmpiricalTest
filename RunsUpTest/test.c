@@ -52,6 +52,13 @@ int test(int stream){
 	    x=k-1;
 	  o[x]++;
 	}
+	int z;
+	printf("Here is vector o:\n");
+	for (z=0;z<k;z++)
+	{
+		printf("%d,", o[z]);
+	}
+	printf("\n\n");
 
 	//calc v (with e_x as expectation)
 
@@ -76,7 +83,7 @@ int test(int stream){
 	double v1_s = idfChisquare(k-1,a/2);
 	double v2_s = idfChisquare(k-1,1-a/2);
 
-	printf("This is v : %f\n", v);
+	//printf("This is v : %f\n", v);
 	return 0;
 
 	//proof
@@ -88,7 +95,8 @@ int test(int stream){
 
 int main(int argc, char **argv){
 	int i=0;
-	for (i=0;i<50;i++){
+
+	for (i=0;i<256;i++){
 		test(i);
 	}
 	return EXIT_SUCCESS;
