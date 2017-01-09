@@ -22,7 +22,7 @@ int Fact (int u)
 int test(){
 	// preliminary test on generator
 	assert(TestRandomNotVerbose() == EXIT_SUCCESS);
-	
+
 	// indexes initialization
 	int x,i;
 	// random variables
@@ -35,7 +35,6 @@ int test(){
 		perror("error in malloc");
 		return EXIT_FAILURE;
 	}
-	printf("malloc success\n");
 
 	for (x=1; x<=k; x++)
 	  o[x] = 0;
@@ -59,8 +58,8 @@ int test(){
 	int w=0;
 	double o_div = 0.00;
 	double e_x = 0.00;
-	for (w=1; w<=k; w++){
-		e_x = n*w/Fact(1+w);
+	for (w=0; w<k; w++){
+		e_x = n*w/Fact(2+w);
 		//printf("This is e_x : %f\n",e_x);
 		o_div = o[w]-e_x;
 		//printf("This is o[w]-e_x : %f\n",o_div);
