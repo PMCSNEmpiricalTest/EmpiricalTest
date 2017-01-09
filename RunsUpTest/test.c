@@ -91,7 +91,7 @@ int test(int stream){
 	double v1_s = idfChisquare(k-1,a/2);
 	double v2_s = idfChisquare(k-1,1-a/2);
 
-	//printf("This is v : %f\n", v);
+	if(DEBUG) printf("This is v : %f\n", v);
 
 	if(DEBUG) printf(" -----  END OF TEST -----\n\n");
 	return 0;
