@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <math.h>
+#include <assert.h>
 #include "rngs.h"
 #include "rvms.h"
 
@@ -19,6 +20,9 @@ int Fact (int u)
 }
 
 int test(){
+	// preliminary test on generator
+	assert(TestRandomNotVerbose() == EXIT_SUCCESS);
+	
 	// indexes initialization
 	int x,i;
 	// random variables
