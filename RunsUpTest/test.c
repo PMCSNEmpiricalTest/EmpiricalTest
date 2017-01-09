@@ -19,6 +19,7 @@ int Fact (int u)
 }
 
 int test(){
+	TestRandom();
 	// indexes initialization
 	int x, i, j;
 	// random variables
