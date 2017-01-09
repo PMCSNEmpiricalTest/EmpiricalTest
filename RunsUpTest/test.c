@@ -37,7 +37,7 @@ int test(){
 	}
 
 	for (i=0; i<n; i++) {
-	  x=1;
+	  x=0;
 	  u=Random();
 		t=Random();
 	  while (t>u) {
@@ -45,10 +45,17 @@ int test(){
 	    u=t;
 	    t=Random();
 	  }
-	  if (x>k)
-	    x=k;
+	  if (x>=k)
+	    x=k-1;
 	  o[x]++;
 	}
+	int z;
+	printf("Here is vector o:\n");
+	for (z=0;z<k;z++)
+	{
+		printf("%d,", o[z]);
+	}
+	printf("\n\n");
 
 	//calc v (with e_x as expectation)
 
@@ -85,7 +92,7 @@ int test(){
 
 int main(int argc, char **argv){
 	int i=0;
-	for (i=0;i<10;i++){
+	for (i=0;i<1;i++){
 		test();
 	}
 	return EXIT_SUCCESS;
