@@ -93,7 +93,7 @@ int test(int stream){
 	double v1_s = idfChisquare(k-1,a/2);
 	double v2_s = idfChisquare(k-1,1-a/2);
 
-	printf("%d;%f;%ld\n", stream, v,test_initial_seed);
+	printf("%d;%f;%ld\n", stream+1, v,test_initial_seed);
 
 
 	if(DEBUG) printf(" -----  END OF TEST -----\n\n");
