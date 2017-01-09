@@ -6,7 +6,7 @@
 #include "rngs.h"
 #include "rvms.h"
 
-#define n 7200
+#define n 14400
 #define k 6
 //confidence level
 #define a 0.05
