@@ -11,6 +11,8 @@
 //confidence level
 #define a 0.05
 
+int DEBUG = 0;
+
 int Fact (int u)
 {
 	int r = 1;
@@ -22,6 +24,8 @@ int Fact (int u)
 int test(int stream){
 	// preliminary test on generator
 	assert(TestRandomNotVerbose() == EXIT_SUCCESS);
+
+	if(DEBUG) printf("\n\n -----  BEGIN OF TEST -----\n");
 
 	//this is the stream to select for each test
 	SelectStream(stream);
@@ -53,12 +57,16 @@ int test(int stream){
 	  o[x]++;
 	}
 	int z;
-	printf("Here is vector o:\n");
-	for (z=0;z<k;z++)
+
+	if(DEBUG)
 	{
-		printf("%d,", o[z]);
+		printf("Here is vector o:\n");
+		for (z=0;z<k;z++)
+		{
+			printf("%d,", o[z]);
+		}
+		printf("\n");
 	}
-	printf("\n\n");
 
 	//calc v (with e_x as expectation)
 
@@ -68,15 +76,15 @@ int test(int stream){
 	double e_x = 0.00;
 	for (w=0; w<k; w++){
 		e_x = n*(w+1)/Fact(2+w);
-		//printf("This is e_x : %f\n",e_x);
+		if(DEBUG) printf("This is e_x : %f\n",e_x);
 		o_div = o[w]-e_x;
-		//printf("This is o[w]-e_x : %f\n",o_div);
+		if(DEBUG) printf("This is o[w]-e_x : %f\n",o_div);
 		o_div = o_div*o_div;
-		//printf("This is o_div*o_div : %f\n",o_div);
+		if(DEBUG) printf("This is o_div*o_div : %f\n",o_div);
 		o_div = o_div/e_x;
-		//printf("This is o_div/e_x : %f\n",o_div);
+		if(DEBUG) printf("This is o_div/e_x : %f\n",o_div);
 		v = v+o_div;
-		//printf("This is v+o_div : %f\n",v);
+		if(DEBUG) printf("This is v+o_div : %f\n",v);
 	}
 	//critical values
 
@@ -84,6 +92,8 @@ int test(int stream){
 	double v2_s = idfChisquare(k-1,1-a/2);
 
 	//printf("This is v : %f\n", v);
+
+	if(DEBUG) printf(" -----  END OF TEST -----\n\n");
 	return 0;
 
 	//proof
@@ -94,6 +104,17 @@ int test(int stream){
 }
 
 int main(int argc, char **argv){
+	if(argc == 2)
+	{
+		//unsafe!
+		DEBUG = strtol(argv[1] , NULL, 10);
+    if (errno != 0)
+    {
+      fprintf(stderr, "Error in conversion\n");
+      return EXIT_FAILURE;
+    }
+	}
+
 	int i=0;
 
 	for (i=0;i<256;i++){
