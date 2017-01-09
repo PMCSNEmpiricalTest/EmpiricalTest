@@ -138,7 +138,7 @@ static int  initialized   = 0;          /* test for stream initialization */
 }
 
 
-   void SelectStream(int index)
+     void SelectStream(int index)
 /* ------------------------------------------------------------------
  * Use this function to set the current random number generator
  * stream -- that stream from which the next random number will come.

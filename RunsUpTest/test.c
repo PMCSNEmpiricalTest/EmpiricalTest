@@ -29,6 +29,8 @@ int test(int stream){
 
 	//this is the stream to select for each test
 	SelectStream(stream);
+	long test_initial_seed;
+	GetSeed(&test_initial_seed);
 
 	// indexes initialization
 	int x,i;
@@ -91,7 +93,8 @@ int test(int stream){
 	double v1_s = idfChisquare(k-1,a/2);
 	double v2_s = idfChisquare(k-1,1-a/2);
 
-	if(DEBUG) printf("This is v : %f\n", v);
+	printf("%d;%f;%ld\n", stream, v,test_initial_seed);
+
 
 	if(DEBUG) printf(" -----  END OF TEST -----\n\n");
 	return 0;
@@ -106,7 +109,6 @@ int test(int stream){
 int main(int argc, char **argv){
 	if(argc == 2)
 	{
-		//unsafe!
 		DEBUG = strtol(argv[1] , NULL, 10);
     if (errno != 0)
     {
@@ -116,7 +118,7 @@ int main(int argc, char **argv){
 	}
 
 	int i=0;
-
+	printf("(stream, v, initial seed)\n");
 	for (i=0;i<256;i++){
 		test(i);
 	}
