@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <errno.h>
 #include <math.h>
 #include "rngs.h"
@@ -16,6 +17,7 @@ int Fact (int n)
 		r *= i;
 	return r;
 }
+
 void test(){
 	// indexes initialization
 	int x, i, j;
@@ -34,20 +36,8 @@ void test(){
 	  o[x] = 0;
 	for (i=0; i<n; i++) {
 	  x=1;
-	  u=Random();for (x=0; x<k; x++)
-		o[x] = 0;
-	for (i =0; i<n; i++) {
-		r = Random();
-		for (j=1; j<d; j++) {
-			u = Random();
-			if (u>r)
-				r=u;
-		}
-		u = exp(d*log(r));
-		x = (int) u*k;
-		o[x]++;
-	}
-	  t=Random();
+	  u=Random();
+		t=Random();
 	  while (t>u) {
 	    x++;
 	    u=t;
@@ -79,4 +69,9 @@ void test(){
 	if (v < v1_s || v > v2_s)
 		printf("test failed");
 	*/
+}
+
+int main(int argc, char **argv){
+	test();
+	return EXIT_SUCCESS;
 }
