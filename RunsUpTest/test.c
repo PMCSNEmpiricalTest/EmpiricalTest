@@ -3,22 +3,22 @@
 #include <errno.h>
 #include <math.h>
 #include "rngs.h"
-#include "rvgs.h"
+#include "rvms.h"
 
 #define n 10
 #define k 4
 //confidence level
 #define a 0.05
 
-int Fact (int n)
+int Fact (int u)
 {
 	int r = 1;
-	for (int i=2; i<=n; i++)
+	for (int i=2; i<=u; i++)
 		r *= i;
 	return r;
 }
 
-void test(){
+int test(){
 	// indexes initialization
 	int x, i, j;
 	// random variables
@@ -29,7 +29,7 @@ void test(){
 	if (o == 0)
 	{
 		perror("malloc");
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	for (x=1; x<=k; x++)
@@ -63,6 +63,8 @@ void test(){
 
 	double v1_s = idfChisquare(k-1,a/2);
 	double v2_s = idfChisquare(k-1,1-a/2);
+
+	return 0;
 
 	//proof
 	/*
