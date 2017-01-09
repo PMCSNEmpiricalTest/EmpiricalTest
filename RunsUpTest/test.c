@@ -19,9 +19,12 @@ int Fact (int u)
 	return r;
 }
 
-int test(){
+int test(int stream){
 	// preliminary test on generator
 	assert(TestRandomNotVerbose() == EXIT_SUCCESS);
+
+	//this is the stream to select for each test
+	SelectStream(stream);
 
 	// indexes initialization
 	int x,i;
@@ -57,16 +60,16 @@ int test(){
 	double o_div = 0.00;
 	double e_x = 0.00;
 	for (w=0; w<k; w++){
-		e_x = n*w/Fact(2+w);
-		printf("This is e_x : %f\n",e_x);
+		e_x = n*(w+1)/Fact(2+w);
+		//printf("This is e_x : %f\n",e_x);
 		o_div = o[w]-e_x;
-		printf("This is o[w]-e_x : %f\n",o_div);
+		//printf("This is o[w]-e_x : %f\n",o_div);
 		o_div = o_div*o_div;
-		printf("This is o_div*o_div : %f\n",o_div);
+		//printf("This is o_div*o_div : %f\n",o_div);
 		o_div = o_div/e_x;
-		printf("This is o_div/e_x : %f\n",o_div);
+		//printf("This is o_div/e_x : %f\n",o_div);
 		v = v+o_div;
-		printf("This is v+o_div : %f\n",v);
+		//printf("This is v+o_div : %f\n",v);
 	}
 	//critical values
 
@@ -85,8 +88,8 @@ int test(){
 
 int main(int argc, char **argv){
 	int i=0;
-	for (i=0;i<10;i++){
-		test();
+	for (i=0;i<50;i++){
+		test(i);
 	}
 	return EXIT_SUCCESS;
 }
